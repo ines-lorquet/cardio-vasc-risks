@@ -1,0 +1,24 @@
+=== Statistiques du jeu de données ===
+Total échantillons : 70000
+Malades : 34979 (49.97%)
+Sains   : 35021 (50.03%)
+
+=== Rapport de performance ===
+Date : 2025-05-07 11:43:12
+Accuracy : 0.7021
+TP : 4675 | TN : 5155 | FP : 1837 | FN : 2333
+
+Précision : 0.7179
+Rappel : 0.6671
+F1-score : 0.6916
+
+=== Facteurs influençant le risque de maladie cardio ===
+- Pressure High : Poids absolu = 3.6774
+- Age : Poids absolu = 0.3891
+- Cholesterol : Poids absolu = 0.3840
+- Weight : Poids absolu = 0.3217
+- Pressure Low : Poids absolu = 0.1282
+
+Matrice de confusion enregistrée dans 'matrice_confusion.png'
+Courbe ROC enregistrée dans 'roc_curve.png'
+Graphique des facteurs influents enregistré dans 'feature_importance.png'
