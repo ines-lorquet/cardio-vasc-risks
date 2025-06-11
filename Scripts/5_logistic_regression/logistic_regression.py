@@ -1,7 +1,7 @@
 import numpy as np
 
 class LogisticRegression:
-    def __init__(self, learning_rate=0.01, epochs=1000):
+    def __init__(self, learning_rate=0.1, epochs=5000):
         self.learning_rate = learning_rate
         self.epochs = epochs
     
@@ -23,5 +23,5 @@ class LogisticRegression:
         X = np.hstack((np.ones((X.shape[0], 1)), X))
         return self.sigmoid(np.dot(X, self.weights))
     
-    def predict(self, X):
-        return (self.predict_proba(X) >= 0.5).astype(int)
+    def predict(self, X, threshold=0.4):
+        return (self.predict_proba(X) >= threshold).astype(int)

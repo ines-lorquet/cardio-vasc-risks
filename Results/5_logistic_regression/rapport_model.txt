@@ -1,24 +1,56 @@
 === Statistiques du jeu de données ===
-Total échantillons : 70000
-Malades : 34979 (49.97%)
-Sains   : 35021 (50.03%)
+Total échantillons : 68499
+Malades : 33875 (49.45%)
+Sains   : 34624 (50.55%)
+Cholestérol 0 : 75.01%
+Cholestérol 1 : 13.53%
+Cholestérol 2 : 11.46%
+Glucose 0 : 85.03%
+Glucose 1 : 7.37%
+Glucose 2 : 7.60%
+Fumeurs : 6028 (8.80%)
+Consommation d'alcool : 3663 (5.35%)
+Actifs : 55036 (80.35%)
 
 === Rapport de performance ===
-Date : 2025-05-07 11:43:12
-Accuracy : 0.7021
-TP : 4675 | TN : 5155 | FP : 1837 | FN : 2333
+Date : 2025-05-09 11:55:29
+Accuracy : 0.7234
+TP : 4950 | TN : 4961 | FP : 1958 | FN : 1831
 
-Précision : 0.7179
-Rappel : 0.6671
-F1-score : 0.6916
+Précision : 0.7166
+Rappel : 0.7300
+F1-score : 0.7232
+
+=== Nettoyage des données ===
+Lignes supprimées pour valeurs aberrantes : 1501
 
 === Facteurs influençant le risque de maladie cardio ===
-- Pressure High : Poids absolu = 3.6774
-- Age : Poids absolu = 0.3891
-- Cholesterol : Poids absolu = 0.3840
-- Weight : Poids absolu = 0.3217
-- Pressure Low : Poids absolu = 0.1282
+- Pression artérielle haute : Poids absolu = 0.9198
+- Cholestérol (0-2) : Poids absolu = 0.5099
+- Âge : Poids absolu = 0.3449
+- Activité physique : Poids absolu = -0.2499
+- Poids : Poids absolu = 0.1472
+- Pression artérielle basse : Poids absolu = 0.1319
+- Glucose (0-2) : Poids absolu = -0.1304
+- Consommation d’alcool (0-2) : Poids absolu = 0.1297
+- Tabagisme (0-2) : Poids absolu = 0.1018
+- Taille : Poids absolu = -0.0330
+- Genre : Poids absolu = -0.0161
 
 Matrice de confusion enregistrée dans 'matrice_confusion.png'
 Courbe ROC enregistrée dans 'roc_curve.png'
 Graphique des facteurs influents enregistré dans 'feature_importance.png'
+Distribution du glucose enregistrée dans 'glucose_distribution.png'
+Corrélation du glucose enregistrée dans 'glucose_correlation.png'
+
+=== Analyse avancée de l'effet du glucose ===
+- Taux de maladies cardiovasculaires par niveau de glucose :
+  ▸ Glucose faible (0) : 47.58% de malades
+  ▸ Glucose moyen (1) : 58.49% de malades
+  ▸ Glucose élevé (2) : 61.46% de malades
+
+- La distribution du glucose montre une forte concentration des niveaux élevés de glucose chez les individus sains.
+- La corrélation entre glucose et pression artérielle est faible, mais il est significativement lié au cholestérol.
+- Le poids absolu du glucose seul est négatif, ce qui indique que des niveaux plus élevés de glucose pourraient être liés à des facteurs protecteurs.
+- L'interaction glucose × cholestérol est fortement positive, suggérant que le glucose devient un indicateur de risque lorsqu'il est combiné au cholestérol.
+- L'ajout d'interactions dans le modèle semble modifier l'interprétation du glucose, nécessitant une analyse approfondie des sous-groupes.
