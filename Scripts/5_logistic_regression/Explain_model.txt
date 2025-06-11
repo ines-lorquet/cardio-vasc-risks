@@ -1,0 +1,70 @@
+1. Les données utilisées
+
+Le jeu de données contient 68 499 individus avec les variables suivantes :
+
+Âge (en années)
+Genre (homme/femme, encodé en binaire)
+Taille (cm)
+Poids (kg)
+Pression artérielle haute et basse (mmHg)
+Cholestérol (3 niveaux : 0, 1, 2)
+Glucose (3 niveaux : 0, 1, 2)
+Tabagisme (oui/non)
+Consommation d’alcool (oui/non)
+Activité physique (oui/non)
+Interactions : cholestérol × glucose, pression artérielle haute × basse, IMC, fumeur × alcool
+La variable cible (y) indique la présence ou non d’un risque cardiovasculaire.
+
+
+2. Prétraitement et nettoyage
+
+Suppression des valeurs aberrantes :
+Les individus avec des valeurs incohérentes (âge <18 ou >100, taille, poids, pression hors normes) sont retirés.
+Encodage :
+Les variables catégorielles sont transformées en valeurs numériques.
+Normalisation :
+Les variables continues (âge, taille, poids, pression, interactions) sont standardisées pour faciliter l’apprentissage du modèle.
+Création de variables d’interaction :
+Certaines interactions (ex : cholestérol × glucose, IMC) sont ajoutées pour enrichir l’information.
+
+
+3. Le modèle utilisé
+
+Type : Régression logistique personnalisée (implémentée à la main)
+Objectif : Prédire la probabilité qu’un individu soit à risque cardiovasculaire (sortie entre 0 et 1)
+Fonctionnement :
+Le modèle calcule une combinaison linéaire pondérée des variables d’entrée.
+Il applique la fonction sigmoïde pour obtenir une probabilité.
+Un seuil (par défaut 0.45) permet de classer l’individu comme « à risque » ou « non à risque ».
+Pondération des classes :
+Pour compenser un éventuel déséquilibre, un poids plus fort est donné aux malades lors de l’entraînement (pos_weight=2.0).
+Régularisation L2 :
+Un terme de pénalité est ajouté pour éviter le surapprentissage.
+
+
+4. Évaluation et validation
+
+Séparation des données :
+80 % pour l’entraînement, 20 % pour le test.
+Métriques calculées :
+Accuracy (exactitude)
+Précision
+Rappel (sensibilité)
+F1-score
+AUC (aire sous la courbe ROC)
+Analyse par sous-groupes :
+Les performances sont évaluées pour différents sous-groupes (glucose, cholestérol, fumeurs, alcool, inactifs) pour vérifier l’équité du modèle.
+
+
+5. Visualisations
+
+Matrice de confusion : montre la répartition des vrais/faux positifs et négatifs.
+Courbe ROC : visualise la capacité du modèle à distinguer malades/sains.
+Importance des variables : indique quelles variables influencent le plus la prédiction.
+Matrice de corrélation : montre les corrélations entre toutes les variables et la cible.
+
+
+Résumé
+
+Le modèle prend en entrée des données médicales nettoyées et enrichies, applique une régression logistique avec pondération et régularisation, puis évalue ses performances globales et par sous-groupes.
+Ce pipeline garantit une analyse robuste, transparente et adaptée au dépistage du risque cardiovasculaire.

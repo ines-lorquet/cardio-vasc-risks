@@ -1,3 +1,4 @@
+=== 1. Statistiques du jeu de données ===
 === Statistiques du jeu de données ===
 Total échantillons : 68499
 Malades : 33875 (49.45%)
@@ -8,49 +9,115 @@ Cholestérol 2 : 11.46%
 Glucose 0 : 85.03%
 Glucose 1 : 7.37%
 Glucose 2 : 7.60%
+Actifs : 55036 (80.35%)
 Fumeurs : 6028 (8.80%)
 Consommation d'alcool : 3663 (5.35%)
-Actifs : 55036 (80.35%)
+Ni fumeur ni alcool : 60617 (88.49%)
+Non fumeur seul (alcool oui) : 1854 (2.71%)
+Non alcool seul (fumeur oui) : 4219 (6.16%)
+Fumeur ET alcool : 1809 (2.64%)
 
-=== Rapport de performance ===
-Date : 2025-05-09 11:55:29
-Accuracy : 0.7234
-TP : 4950 | TN : 4961 | FP : 1958 | FN : 1831
+=== 2. Nettoyage et préparation des données ===
+- Lignes supprimées pour valeurs aberrantes : 1501
 
-Précision : 0.7166
-Rappel : 0.7300
-F1-score : 0.7232
+=== 3. Entraînement et performance du modèle ===
+- Date : 2025-06-11 14:49:25
+- Accuracy : 0.6421 (64.21%)
+- Matrice de confusion :
+    - TP : 6199 | TN : 2598 | FP : 4321 | FN : 582
+- Scores :
+    - Précision : 0.5893 (58.93%)
+    - Rappel : 0.9142 (91.42%)
+    - F1-score : 0.7166 (71.66%)
+- AUC (Area Under Curve) : 0.7857 (78.57%)
 
-=== Nettoyage des données ===
-Lignes supprimées pour valeurs aberrantes : 1501
+=== 3bis. Performances par sous-groupe ===
+---- Glucose ----
+--- Glucose 0 (11648 échantillons) ---
+Précision : 0.5744
+Rappel : 0.9044
+F1-score : 0.7026
+--- Glucose 1 (1014 échantillons) ---
+Précision : 0.6647
+Rappel : 0.9438
+F1-score : 0.7801
+--- Glucose 2 (1038 échantillons) ---
+Précision : 0.6556
+Rappel : 0.9694
+F1-score : 0.7822
+---- Cholestérol ----
+--- Cholestérol 0 (10233 échantillons) ---
+Précision : 0.5420
+Rappel : 0.8833
+F1-score : 0.6718
+--- Cholestérol 1 (1834 échantillons) ---
+Précision : 0.6335
+Rappel : 0.9468
+F1-score : 0.7591
+--- Cholestérol 2 (1633 échantillons) ---
+Précision : 0.7581
+Rappel : 0.9976
+F1-score : 0.8615
+---- Fumeurs ----
+--- Fumeurs (1219 échantillons) ---
+Précision : 0.6217
+Rappel : 0.9013
+F1-score : 0.7358
+---- Alcool ----
+--- Alcool (749 échantillons) ---
+Précision : 0.6460
+Rappel : 0.9026
+F1-score : 0.7530
+---- Inactifs ----
+--- Inactifs (2693 échantillons) ---
+Précision : 0.6068
+Rappel : 0.9351
+F1-score : 0.7360
 
-=== Facteurs influençant le risque de maladie cardio ===
-- Pression artérielle haute : Poids absolu = 0.9198
-- Cholestérol (0-2) : Poids absolu = 0.5099
-- Âge : Poids absolu = 0.3449
-- Activité physique : Poids absolu = -0.2499
-- Poids : Poids absolu = 0.1472
-- Pression artérielle basse : Poids absolu = 0.1319
-- Glucose (0-2) : Poids absolu = -0.1304
-- Consommation d’alcool (0-2) : Poids absolu = 0.1297
-- Tabagisme (0-2) : Poids absolu = 0.1018
-- Taille : Poids absolu = -0.0330
-- Genre : Poids absolu = -0.0161
+Conclusion :
+Le modèle est robuste pour détecter les malades dans tous les sous-groupes, surtout ceux à risque élevé (glucose ou cholestérol 2). Il reste prudent (beaucoup de faux positifs), ce qui est adapté à un contexte de prévention où il vaut mieux alerter trop que pas assez.
+Pour améliorer la précision, il faudra travailler sur la réduction des faux positifs (par exemple, ajuster le seuil, ajouter des variables, ou utiliser un modèle plus complexe).
 
-Matrice de confusion enregistrée dans 'matrice_confusion.png'
-Courbe ROC enregistrée dans 'roc_curve.png'
-Graphique des facteurs influents enregistré dans 'feature_importance.png'
-Distribution du glucose enregistrée dans 'glucose_distribution.png'
-Corrélation du glucose enregistrée dans 'glucose_correlation.png'
+=== 4. Explication des métriques ===
+- **Accuracy (Exactitude)** : Proportion de prédictions correctes sur l’ensemble des cas.
+- **Précision** : Proportion de vrais positifs parmi les cas prédits positifs (évite les faux positifs).
+- **Rappel (Recall)** : Proportion de vrais positifs détectés parmi tous les cas réellement positifs (évite les faux négatifs).
+- **F1-score** : Moyenne harmonique entre précision et rappel, équilibre entre les deux.
+- **AUC (Area Under Curve)** : Aire sous la courbe ROC, mesure la capacité du modèle à distinguer les classes (1 = parfait, 0.5 = aléatoire).
+=== 5. Choix du seuil et pondération des classes ===
+- Seuil de classification optimisé pour maximiser le rappel et réduire les faux négatifs.
+- Pondération de classe (pos_weight=2.0) pour favoriser la détection des malades.
+- Résultat : rappel et F1-score augmentés, légère baisse de la précision.
 
-=== Analyse avancée de l'effet du glucose ===
-- Taux de maladies cardiovasculaires par niveau de glucose :
-  ▸ Glucose faible (0) : 47.58% de malades
-  ▸ Glucose moyen (1) : 58.49% de malades
-  ▸ Glucose élevé (2) : 61.46% de malades
+=== 6. Importance des caractéristiques ===
+- Variables les plus influentes (poids absolu) :
+    - Pression artérielle haute : 0.6448
+    - Cholestérol (0-2) : 0.5030
+    - PA haute x PA basse : 0.3607
+    - Âge : 0.3557
+    - Activité physique : -0.1963
+    - Consommation d’alcool : -0.0926
+    - Tabagisme : -0.0903
+    - Poids : 0.0893
+    - Cholestérol x Glucose : -0.0741
+    - IMC : 0.0698
+    - Fumeur x Alcool : -0.0379
+    - Genre : -0.0089
+    - Pression artérielle basse : -0.0029
+    - Taille : -0.0021
+    - Glucose (0-2) : -0.0000
 
-- La distribution du glucose montre une forte concentration des niveaux élevés de glucose chez les individus sains.
-- La corrélation entre glucose et pression artérielle est faible, mais il est significativement lié au cholestérol.
-- Le poids absolu du glucose seul est négatif, ce qui indique que des niveaux plus élevés de glucose pourraient être liés à des facteurs protecteurs.
-- L'interaction glucose × cholestérol est fortement positive, suggérant que le glucose devient un indicateur de risque lorsqu'il est combiné au cholestérol.
-- L'ajout d'interactions dans le modèle semble modifier l'interprétation du glucose, nécessitant une analyse approfondie des sous-groupes.
+=== 7. Visualisations et interprétations ===
+- Matrice de confusion (`matrice_confusion.png`) : Visualise la répartition des vrais/faux positifs et négatifs.
+- Courbe ROC (`roc_curve.png`) : Capacité du modèle à distinguer malades/sains (AUC proche de 1 = meilleur).
+- Importance des caractéristiques (`feature_importance.png`) : Poids de chaque variable dans la prédiction.
+- Matrice de corrélation (`correlation_matrix.png`) : Corrélations entre toutes les variables et la cible.
+
+=== 8. Résumé des résultats ===
+- Le modèle détecte très bien les malades (rappel élevé), ce qui est crucial en santé publique.
+- Il fait cependant beaucoup de faux positifs (précision modérée), donc certains sains sont à tort considérés à risque.
+- L’équilibre global (F1-score) est correct.
+- L’AUC montre que le modèle distingue bien les deux classes.
+
+=== 9. Conclusion ===
+Ce modèle est adapté au dépistage : il privilégie la détection des malades (peu de faux négatifs), quitte à avoir plus de faux positifs. C’est souvent le choix en médecine préventive.

@@ -1,0 +1,80 @@
+1. Statistiques du jeu de données
+
+Total échantillons : 68 499
+Répartition cible : Malades 49,45 %, Sains 50,55 % (équilibré)
+Sous-groupes :
+Cholestérol 0/1/2 : 75.01% / 13,53 % / 11,46 %
+Glucose 0/1/2 : 85.03% / 7,37 % / 7,60 %
+Fumeurs : 8,80 %
+Alcool : 5,35 %
+Inactifs : 19,65 %
+
+
+2. Nettoyage
+
+1 501 lignes supprimées pour valeurs aberrantes.
+
+
+3. Performance globale du modèle
+
+Accuracy : 64,21 %
+Précision : 58,93 %
+Rappel : 91,42 %
+F1-score : 71,66 %
+AUC : 78,57 %
+
+Matrice de confusion :
+TP : 6 199 | TN : 2 598 | FP : 4 321 | FN : 582
+
+Interprétation :
+Le modèle détecte très bien les malades (rappel élevé), mais il génère beaucoup de faux positifs (précision modérée).
+
+
+4. Performances par sous-groupe
+
+Glucose élevé (2) : F1-score 78 %, rappel 97 % (excellente détection des malades à haut risque)
+Cholestérol élevé (2) : F1-score 86 %, rappel 99 % (excellente détection)
+Fumeurs : F1-score 74 %, rappel 90 %
+Alcool : F1-score 75 %, rappel 90 %
+Inactifs : F1-score 74 %, rappel 94 %
+
+Interprétation :
+Le modèle est particulièrement performant pour les groupes à risque élevé (glucose ou cholestérol 2).
+Dans tous les sous-groupes, le rappel reste très élevé, ce qui limite les faux négatifs.
+
+
+5. Explication des métriques
+
+Accuracy : % de prédictions correctes.
+Précision : % de vrais malades parmi les prédits malades.
+Rappel : % de malades détectés parmi tous les vrais malades.
+F1-score : équilibre entre précision et rappel.
+AUC : capacité à distinguer malades/sains.
+
+
+6. Choix du seuil et pondération
+
+Seuil optimisé pour maximiser le rappel.
+Pondération de classe (pos_weight=2.0) pour favoriser la détection des malades.
+
+
+7. Importance des caractéristiques
+
+Les variables les plus influentes sont : pression artérielle haute, cholestérol, âge, activité physique, etc.
+
+
+8. Visualisations
+
+Matrice de confusion, courbe ROC, importance des variables, matrice de corrélation.
+
+
+Conclusion
+
+Le modèle est robuste pour détecter les malades, surtout dans les sous-groupes à risque élevé (glucose ou cholestérol 2).
+Il reste prudent : il préfère alerter trop (faux positifs) que rater un malade (faux négatif), ce qui est adapté à la prévention.
+Pour améliorer la précision (réduire les faux positifs), il faudra :
+
+Ajuster le seuil de classification,
+Ajouter des variables explicatives,
+Ou tester des modèles plus complexes.
+Ce modèle est donc adapté au dépistage préventif, où il vaut mieux détecter trop que pas assez.
