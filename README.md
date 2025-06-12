@@ -124,6 +124,56 @@ Le jeu de données contient les variables suivantes :
 
 ---
 
+## 6. 🧾 **Vérification de la normalisation des variables**
+
+Un script dédié [`check_normalization.py`](Scripts/5_logistic_regression/check_normalization.py) a été ajouté pour vérifier que la normalisation appliquée dans `load_data` est correcte sur toutes les variables du jeu de données.
+
+### **Fonctionnement du script**
+
+- Affiche la moyenne et l’écart-type des variables continues (après StandardScaler).
+- Vérifie que les variables Cholestérol et Glucose (après MinMaxScaler) sont bien bornées entre 0 et 2, avec uniquement les valeurs attendues.
+- Affiche la moyenne et l’écart-type des variables d’interaction (après StandardScaler).
+
+### **Résultats obtenus**
+
+```
+=== Vérification de la normalisation ===
+Âge: moyenne=-0.0000, écart-type=1.0000
+Genre: moyenne=0.0000, écart-type=1.0000
+Taille: moyenne=0.0000, écart-type=1.0000
+Poids: moyenne=-0.0000, écart-type=1.0000
+Pression artérielle haute: moyenne=-0.0000, écart-type=1.0000
+Pression artérielle basse: moyenne=-0.0000, écart-type=1.0000
+Cholestérol (0-2): min=0.00, max=2.00, valeurs uniques=[0. 1. 2.]
+Glucose (0-2): min=0.00, max=2.00, valeurs uniques=[0. 1. 2.]
+Cholestérol x Glucose: moyenne=0.0000, écart-type=1.0000
+PA haute x PA basse: moyenne=-0.0000, écart-type=1.0000
+IMC: moyenne=-0.0000, écart-type=1.0000
+Fumeur x Âge: moyenne=0.0000, écart-type=1.0000
+Alcool x Âge: moyenne=0.0000, écart-type=1.0000
+Tabac x Sexe: moyenne=-0.0000, écart-type=1.0000
+Alcool x Sexe: moyenne=-0.0000, écart-type=1.0000
+Tabac x Activité physique: moyenne=-0.0000, écart-type=1.0000
+Alcool x Activité physique: moyenne=0.0000, écart-type=1.0000
+Glucose x Âge: moyenne=0.0000, écart-type=1.0000
+Glucose x Activité physique: moyenne=-0.0000, écart-type=1.0000
+Glucose x Sexe: moyenne=0.0000, écart-type=1.0000
+Glucose x IMC: moyenne=0.0000, écart-type=1.0000
+Cholestérol x Âge: moyenne=0.0000, écart-type=1.0000
+Cholestérol x Activité physique: moyenne=0.0000, écart-type=1.0000
+Cholestérol x Sexe: moyenne=0.0000, écart-type=1.0000
+Cholestérol x IMC: moyenne=0.0000, écart-type=1.0000
+```
+
+### **Conclusion**
+
+La normalisation appliquée est correcte :
+- Les variables continues et d’interaction ont bien une moyenne nulle et un écart-type de 1.
+- Cholestérol et Glucose sont bien bornés entre 0 et 2, avec uniquement les valeurs attendues.
+- Les données sont donc prêtes pour l’entraînement et l’interprétation du modèle sans biais de mise à l’échelle.
+
+---
+
 ## 7. 📊 **Résultats**
 
 ### **Statistiques globales**
@@ -149,6 +199,9 @@ Le jeu de données contient les variables suivantes :
 - **Consommation d’alcool** : _47,67 % de malades (3 663 cas)_
 
 ---
+
+
+
 
 ### **Performances globales**
 
