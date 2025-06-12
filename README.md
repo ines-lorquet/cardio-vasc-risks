@@ -86,20 +86,20 @@ Le jeu de données contient les variables suivantes :
 
 ```mermaid
 flowchart TD
-    A[Chargement des données<br>cardio_train_clean.csv] --> B[Nettoyage des données<br>(suppression valeurs aberrantes)]
-    B --> C[Encodage des variables<br>(catégorielles → numériques)]
-    C --> D[Création des variables d’interaction<br>(ex: cholestérol × glucose, IMC...)]
-    D --> E[Normalisation<br>StandardScaler / MinMaxScaler]
-    E --> F[Vérification de la normalisation<br>(check_normalization.py)]
-    F --> G[Séparation Train/Test<br>(80% / 20%)]
-    G --> H[Entraînement du modèle<br>Régression logistique maison]
-    H --> I[Recherche du seuil optimal<br>(balayage 0.2 à 0.6)]
+    A[Chargement des données\ndata/cardio_train_clean.csv] --> B[Nettoyage des données\n(suppression valeurs aberrantes)]
+    B --> C[Encodage des variables\n(catégorielles → numériques)]
+    C --> D[Création des variables d’interaction\n(ex: cholestérol × glucose, IMC...)]
+    D --> E[Normalisation\nStandardScaler / MinMaxScaler]
+    E --> F[Vérification de la normalisation\n(check_normalization.py)]
+    F --> G[Séparation Train/Test\n(80% / 20%)]
+    G --> H[Entraînement du modèle\nRégression logistique maison]
+    H --> I[Recherche du seuil optimal\n(balayage 0.2 à 0.6)]
     I --> J[Prédiction sur le jeu de test]
-    J --> K[Évaluation globale<br>Accuracy, Précision, Rappel, F1, AUC]
-    K --> L[Analyse par sous-groupes<br>(glucose, cholestérol, fumeurs, alcool, inactifs)]
-    L --> M[Génération du rapport<br>(report.py)]
-    M --> N[Visualisations automatiques<br>(matrice confusion, ROC, importance, corrélation, barplots)]
-    N --> O[Interprétation & synthèse<br>(README, rapport, ablation, analyse poids)]
+    J --> K[Évaluation globale\nAccuracy, Précision, Rappel, F1, AUC]
+    K --> L[Analyse par sous-groupes\n(glucose, cholestérol, fumeurs, alcool, inactifs)]
+    L --> M[Génération du rapport\n(report.py)]
+    M --> N[Visualisations automatiques\n(matrice confusion, ROC, importance, corrélation, barplots)]
+    N --> O[Interprétation & synthèse\n(README, rapport, ablation, analyse poids)]
 
     style A fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
     style F fill:#b3e5fc,stroke:#0288d1,stroke-width:2px
