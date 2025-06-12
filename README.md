@@ -259,7 +259,7 @@ Le jeu de données contient les variables suivantes :
 > - des **interactions complexes**,
 > - ou des **spécificités du jeu de données** (_ex : sous-représentation dans l’échantillon, inéquité dans la proportion de malades et de sains pour la variable concernée_).
 
-**Il est donc important d’interpréter ces poids avec prudence et de les remettre en perspective avec la littérature médicale et le contexte clinique.**
+**Il est donc important d’interpréter ces poids, qu'ils soient positifs ou négatifs, avec prudence et de les remettre en perspective avec la qualité des données et leur répartitions, la littérature médicale et le contexte clinique.**
 
 ---
 
