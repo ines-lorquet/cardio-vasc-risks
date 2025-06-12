@@ -119,8 +119,8 @@ flowchart TD
     O_desc([Synthèse, interprétation médicale, limites, recommandations.]) --- O
 
     %% Scripts indépendants
-    CN[check_normalization.py<br/>(Vérification normalisation)]:::utilitaire
-    FA[feature_analysis.py<br/>(Analyse avancée des variables)]:::utilitaire
+    CN["check_normalization.py\n(Vérification normalisation)"]:::utilitaire
+    FA["feature_analysis.py\n(Analyse avancée des variables)"]:::utilitaire
 
     %% Liaisons utilitaires (pointillés)
     CN -.-> F
