@@ -1,80 +1,96 @@
+Rapport d’analyse du modèle de prédiction du risque cardiovasculaire
+
+
 1. Statistiques du jeu de données
 
-Total échantillons : 68 499
-Répartition cible : Malades 49,45 %, Sains 50,55 % (équilibré)
-Sous-groupes :
-Cholestérol 0/1/2 : 75.01% / 13,53 % / 11,46 %
-Glucose 0/1/2 : 85.03% / 7,37 % / 7,60 %
-Fumeurs : 8,80 %
-Alcool : 5,35 %
-Inactifs : 19,65 %
-
-
-2. Nettoyage
-
-1 501 lignes supprimées pour valeurs aberrantes.
-
-
-3. Performance globale du modèle
-
-Accuracy : 64,21 %
-Précision : 58,93 %
-Rappel : 91,42 %
-F1-score : 71,66 %
-AUC : 78,57 %
-
-Matrice de confusion :
-TP : 6 199 | TN : 2 598 | FP : 4 321 | FN : 582
-
+Total d’échantillons : 68 499
+Malades : 33 875 (49,45 %)
+Sains : 34 624 (50,55 %)
+Cholestérol 0 : 75,01 %
+Cholestérol 1 : 13,53 %
+Cholestérol 2 : 11,46 %
+Glucose 0 : 85,03 %
+Glucose 1 : 7,37 %
+Glucose 2 : 7,60 %
+Actifs : 80,35 %
+Fumeurs : 8,80 %
+Consommation d’alcool : 5,35 %
+Ni fumeur ni alcool : 88,49 %
+Non fumeur seul (alcool oui) : 2,71 %
+Non alcool seul (fumeur oui) : 6,16 %
+Fumeur ET alcool : 2,64 %
+Lignes supprimées pour valeurs aberrantes : 1 501
+2. Proportion de malades selon tabac/alcool
+Tabagisme=0 : 49,71 % de malades (62 471 cas)
+Tabagisme=1 : 46,81 % de malades (6 028 cas)
+Consommation d’alcool=0 : 49,55 % de malades (64 836 cas)
+Consommation d’alcool=1 : 47,67 % de malades (3 663 cas)
 Interprétation :
-Le modèle détecte très bien les malades (rappel élevé), mais il génère beaucoup de faux positifs (précision modérée).
+Dans ce jeu de données, la proportion de malades est légèrement plus faible chez les fumeurs et les buveurs que chez les non-fumeurs et non-buveurs. Cela explique pourquoi le modèle n’attribue pas de poids positif à ces facteurs : il apprend ce que montrent les données, et ici, tabac et alcool ne sont pas associés à un sur-risque.
 
 
-4. Performances par sous-groupe
+3. Corrélation avec la cible
 
-Glucose élevé (2) : F1-score 78 %, rappel 97 % (excellente détection des malades à haut risque)
-Cholestérol élevé (2) : F1-score 86 %, rappel 99 % (excellente détection)
-Fumeurs : F1-score 74 %, rappel 90 %
-Alcool : F1-score 75 %, rappel 90 %
-Inactifs : F1-score 74 %, rappel 94 %
+Variable // Corrélation
+Pression artérielle haute // 0.429
+PA haute x PA basse // 0.413
+Pression artérielle basse // 0.339
+Âge // 0.239
+Cholestérol (0-2) // 0.221
+IMC // 0.191
+Poids // 0.179
+Cholestérol x Glucose // 0.105
+Glucose (0-2) // 0.089
+...	...
+Tabagisme // -0.016
+Consommation d’alcool // -0.008
 
-Interprétation :
-Le modèle est particulièrement performant pour les groupes à risque élevé (glucose ou cholestérol 2).
-Dans tous les sous-groupes, le rappel reste très élevé, ce qui limite les faux négatifs.
-
-
-5. Explication des métriques
-
-Accuracy : % de prédictions correctes.
-Précision : % de vrais malades parmi les prédits malades.
-Rappel : % de malades détectés parmi tous les vrais malades.
-F1-score : équilibre entre précision et rappel.
-AUC : capacité à distinguer malades/sains.
+Remarque : Les corrélations de tabac et alcool avec la maladie sont très faibles et négatives.
 
 
-6. Choix du seuil et pondération
+4. Test d’ablation (retrait d’une variable à la fois)
 
-Seuil optimisé pour maximiser le rappel.
-Pondération de classe (pos_weight=2.0) pour favoriser la détection des malades.
+AUC complet : 0.7693
+Retrait de 'Tabagisme' : AUC = 0.7856 (diff = +0.0163)
+Retrait de 'Consommation d’alcool' : AUC = 0.7856 (diff = +0.0163)
+Retrait de variables majeures (pression, cholestérol, âge, IMC, poids) : impact faible ou nul sur l’AUC.
+Retrait d’interactions tabac/alcool : aucun impact sur l’AUC.
+
+Conclusion :
+Tabac et alcool n’apportent aucune valeur prédictive dans ce jeu de données. Leur retrait n’impacte pas la performance du modèle.
 
 
-7. Importance des caractéristiques
+5. Performances globales du modèle
 
-Les variables les plus influentes sont : pression artérielle haute, cholestérol, âge, activité physique, etc.
+TP : 6193
+TN : 2601
+FP : 4318
+FN : 588
+Accuracy : 64,19 %
+Précision : 58,92 %
+Rappel : 91,33 %
+F1-score : 71,63 %
+AUC : 78,56 %
+
+Le modèle privilégie la détection des malades (rappel élevé), ce qui est adapté à la prévention, mais au prix d’un taux de faux positifs élevé.
 
 
-8. Visualisations
+6. Résumé et recommandations
 
-Matrice de confusion, courbe ROC, importance des variables, matrice de corrélation.
+Résumé
 
+Le modèle est cohérent avec les données : il détecte bien les malades, mais tabac et alcool n’apportent aucune valeur prédictive, car ils ne sont pas associés à un sur-risque dans ce jeu de données.
+Les variables médicales classiques (pression artérielle, cholestérol, âge, IMC) dominent la prédiction.
+Les performances sont bonnes pour la détection des malades, mais il y a beaucoup de faux positifs.
+
+Recommandations pour améliorer le modèle
+
+Collecte de données : Obtenir un jeu de données où l’effet du tabac/alcool est plus marqué ou mieux réparti.
+Nouvelles variables : Ajouter des facteurs comportementaux, sociaux ou familiaux si disponibles.
+Modèles non linéaires : Tester RandomForest, XGBoost, ou réseaux de neurones pour explorer des effets complexes.
+Analyse par sous-groupes : Entraîner des modèles dédiés aux fumeurs/buveurs pour voir si d’autres facteurs ressortent.
+Validation externe : Tester le modèle sur un autre jeu de données pour vérifier la généralisation.
 
 Conclusion
 
-Le modèle est robuste pour détecter les malades, surtout dans les sous-groupes à risque élevé (glucose ou cholestérol 2).
-Il reste prudent : il préfère alerter trop (faux positifs) que rater un malade (faux négatif), ce qui est adapté à la prévention.
-Pour améliorer la précision (réduire les faux positifs), il faudra :
-
-Ajuster le seuil de classification,
-Ajouter des variables explicatives,
-Ou tester des modèles plus complexes.
-Ce modèle est donc adapté au dépistage préventif, où il vaut mieux détecter trop que pas assez.
+Ce modèle est adapté au dépistage préventif : il privilégie la détection des malades, quitte à générer des faux positifs. Les facteurs tabac et alcool n’apportent pas d’information discriminante dans ce jeu de données, ce qui reflète la réalité de l’échantillon analysé. Pour améliorer la prise en compte de ces facteurs, il faudra enrichir ou diversifier les données, ou explorer d’autres types de modèles.
