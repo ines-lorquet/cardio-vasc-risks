@@ -439,6 +439,25 @@ La normalisation appliquée est correcte :
 
 ---
 
+### **🟦 Précisions sur l'amélioration du rappel et la réduction des faux négatifs**
+
+- **Comment le rappel a été amélioré et les faux négatifs réduits ?**
+    - **Ajustement du seuil de classification** :  
+      Le modèle ne se contente pas du seuil classique de 0.5 pour la probabilité : il recherche automatiquement le seuil optimal (entre 0.2 et 0.6) qui maximise le F1-score ou le rappel sur le jeu de test.  
+      En abaissant ce seuil (ici, 0.45), le modèle classe plus d’individus comme « à risque », ce qui permet de détecter davantage de vrais malades (vrais positifs) et donc de **réduire le nombre de faux négatifs**.
+    - **Pondération des classes** :  
+      L’entraînement utilise un paramètre `pos_weight=2.0` qui donne plus d’importance aux malades lors de l’optimisation. Cela pousse le modèle à privilégier la détection des cas positifs, donc à **minimiser les faux négatifs**.
+    - **Conséquence sur la précision et les faux positifs** :  
+      Ce choix méthodologique augmente le rappel (sensibilité) mais diminue la précision : il y a plus de faux positifs (des personnes saines classées à tort comme malades).  
+      **C’est un compromis assumé** : en santé publique, il vaut mieux détecter trop de cas (même si certains sont des faux positifs) que de rater des personnes réellement à risque (faux négatifs).
+
+> **En résumé** :  
+> - **Seuil de classification abaissé** + **pondération des classes** = **plus de malades détectés** (rappel ↑, faux négatifs ↓),  
+> - mais **plus de sains à tort classés malades** (précision ↓, faux positifs ↑).  
+> - Ce compromis est adapté à la prévention, où il est crucial de ne pas manquer de personnes à risque.
+
+---
+
 ## **🟨 Limites et pistes d’amélioration**
 
 - _Le modèle repose uniquement sur des variables cliniques de base : l’ajout de données biologiques, génétiques ou de suivi longitudinal pourrait améliorer la précision._
