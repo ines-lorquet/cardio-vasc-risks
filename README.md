@@ -86,25 +86,39 @@ Le jeu de données contient les variables suivantes :
 
 ```mermaid
 flowchart TD
-    A[Chargement des données\ndata/cardio_train_clean.csv] --> B[Nettoyage des données\n(suppression valeurs aberrantes)]
-    B --> C[Encodage des variables\n(catégorielles → numériques)]
-    C --> D[Création des variables d’interaction\n(ex: cholestérol × glucose, IMC...)]
-    D --> E[Normalisation\nStandardScaler / MinMaxScaler]
-    E --> F[Vérification de la normalisation\n(check_normalization.py)]
-    F --> G[Séparation Train/Test\n(80% / 20%)]
-    G --> H[Entraînement du modèle\nRégression logistique maison]
-    H --> I[Recherche du seuil optimal\n(balayage 0.2 à 0.6)]
+    A[Chargement des données] --> B[Nettoyage des données]
+    B --> C[Encodage des variables]
+    C --> D[Création des variables d’interaction]
+    D --> E[Normalisation]
+    E --> F[Vérification de la normalisation]
+    F --> G[Séparation Train/Test]
+    G --> H[Entraînement du modèle]
+    H --> I[Recherche du seuil optimal]
     I --> J[Prédiction sur le jeu de test]
-    J --> K[Évaluation globale\nAccuracy, Précision, Rappel, F1, AUC]
-    K --> L[Analyse par sous-groupes\n(glucose, cholestérol, fumeurs, alcool, inactifs)]
-    L --> M[Génération du rapport\n(report.py)]
-    M --> N[Visualisations automatiques\n(matrice confusion, ROC, importance, corrélation, barplots)]
-    N --> O[Interprétation & synthèse\n(README, rapport, ablation, analyse poids)]
+    J --> K[Évaluation globale]
+    K --> L[Analyse par sous-groupes]
+    L --> M[Génération du rapport]
+    M --> N[Visualisations automatiques]
+    N --> O[Interprétation & synthèse]
 
-    style A fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style F fill:#b3e5fc,stroke:#0288d1,stroke-width:2px
+    %% Préparation (bleu)
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+    style C fill:#90caf9,stroke:#1976d2,stroke-width:2px
+    style D fill:#64b5f6,stroke:#1976d2,stroke-width:2px
+    style E fill:#42a5f5,stroke:#1976d2,stroke-width:2px
+    style F fill:#29b6f6,stroke:#0288d1,stroke-width:2px
+    style G fill:#4dd0e1,stroke:#00838f,stroke-width:2px
+
+    %% Modélisation (orange/rose)
     style H fill:#ffe0b2,stroke:#fb8c00,stroke-width:2px
-    style M fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
+    style I fill:#ffcc80,stroke:#fb8c00,stroke-width:2px
+    style J fill:#ffb74d,stroke:#f57c00,stroke-width:2px
+    style K fill:#ff8a65,stroke:#d84315,stroke-width:2px
+    style L fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
+    style M fill:#f06292,stroke:#ad1457,stroke-width:2px
+
+    %% Résultats (vert/jaune)
     style N fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
     style O fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
 ```
