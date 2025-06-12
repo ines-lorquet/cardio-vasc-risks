@@ -118,6 +118,15 @@ flowchart TD
     N_desc([Courbes ROC, matrice confusion, importance variables, barplots, corrélations.]) --- N
     O_desc([Synthèse, interprétation médicale, limites, recommandations.]) --- O
 
+    %% Scripts indépendants
+    CN[check_normalization.py<br/>(Vérification normalisation)]:::utilitaire
+    FA[feature_analysis.py<br/>(Analyse avancée des variables)]:::utilitaire
+
+    %% Liaisons utilitaires (pointillés)
+    CN -.-> F
+    FA -.-> K
+    FA -.-> N
+
     %% Préparation (bleu)
     style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
     style B fill:#bbdefb,stroke:#1976d2,stroke-width:2px,color:#111
@@ -142,6 +151,9 @@ flowchart TD
     %% Styles explications
     classDef explication fill:#fff,stroke:#bdbdbd,stroke-dasharray: 2 2,color:#111,font-size:12px
     class A_desc,B_desc,C_desc,D_desc,E_desc,F_desc,G_desc,H_desc,I_desc,J_desc,K_desc,L_desc,M_desc,N_desc,O_desc explication
+
+    %% Styles utilitaires
+    classDef utilitaire fill:#fffde7,stroke:#bdbdbd,stroke-dasharray: 4 2,color:#111,font-size:13px
 ```
 
 ### 1. **Chargement et nettoyage des données** (`data_processing.py`)
