@@ -1,5 +1,8 @@
 # Prédiction du Risque Cardiovasculaire par Régression Logistique
 
+
+# Job 5 : Regression Logistique (fait main)
+
 ## 1. Contexte et Objectif
 
 Ce projet vise à développer un modèle de prédiction du risque cardiovasculaire à partir de données médicales issues de 68 499 individus. L’objectif est d’identifier les personnes à risque à l’aide d’une régression logistique personnalisée, en mettant l’accent sur la robustesse, la transparence et l’équité du modèle.
@@ -135,17 +138,8 @@ Le jeu de données contient les variables suivantes :
   - Performances évaluées pour différents sous-groupes (glucose, cholestérol, fumeurs, alcool, inactifs) via des fonctions dédiées ([`split_by_glucose`](Scripts/5_logistic_regression/data_processing.py), etc.).
   - **But** : Vérifier l’équité du modèle et détecter d’éventuels biais.
 
-### 6. Visualisation des résultats (`visualization.py`)
 
-- **Matrice de confusion** : [`plot_confusion_matrix`](Scripts/5_logistic_regression/visualization.py)
-- **Courbe ROC** : [`plot_roc_curve`](Scripts/5_logistic_regression/visualization.py)
-- **Importance des variables** : [`plot_feature_importance`](Scripts/5_logistic_regression/visualization.py)
-- **Matrice de corrélation** : [`plot_correlation_matrix`](Scripts/5_logistic_regression/visualization.py)
-- **Export** : Toutes les figures sont enregistrées dans `Results/5_logistic_regression/`.
-
----
-
-## 8. Résultats
+## 6. Résultats
 
 ### Statistiques globales
 
@@ -275,12 +269,23 @@ Le modèle reste robuste dans tous les sous-groupes, surtout pour les profils à
 
 ---
 
-### Interprétation
-
+**Interprétation globale et conclusion** :
 - Le modèle détecte très bien les malades (rappel élevé), ce qui est crucial en santé publique.
 - Il fait cependant beaucoup de faux positifs (précision modérée), donc certains sains sont à tort considérés à risque.
 - Les variables médicales classiques dominent la prédiction.
 - Tabac et alcool n’apportent aucune valeur prédictive : leur retrait n’impacte pas la performance du modèle (corrélation négative ou nulle, test d’ablation sans effet).
+- Un choix méthodologique a été fait : privilégier la réduction des faux négatifs (donc maximiser le rappel), quitte à augmenter le nombre de faux positifs et à réduire la précision. Ce compromis est assumé car il est préférable, en santé publique, d’alerter trop que pas assez pour ne pas manquer de personnes à risque.
+
+**Limites et pistes d’amélioration :**
+- Le modèle repose uniquement sur des variables cliniques de base : l’ajout de données biologiques, génétiques ou de suivi longitudinal pourrait améliorer la précision.
+- Le taux de faux positifs reste élevé, ce qui peut entraîner une sur-sollicitation du système de santé ou un stress inutile pour certains patients.
+- La régression logistique, bien que transparente, ne capture pas forcément des relations non linéaires complexes : des modèles plus avancés (arbres, réseaux de neurones) pourraient être explorés.
+- Les variables tabac et alcool n’apportent pas de valeur ajoutée ici, mais cela peut être lié à la qualité ou à la déclaration de ces données dans ce jeu précis.
+- Le modèle n’a pas été testé sur des données externes : une validation sur d’autres cohortes serait nécessaire pour confirmer sa robustesse.
+
+**Justesse par rapport à l’attendu :**
+- Le modèle répond bien à l’objectif initial : il permet d’identifier efficacement les personnes à risque cardiovasculaire, avec un rappel élevé, ce qui est essentiel en prévention.
+- Il privilégie la sensibilité au détriment de la spécificité, ce qui est cohérent avec une démarche de santé publique où il vaut mieux alerter trop que pas assez.
+- Les résultats sont cohérents avec la littérature médicale : les facteurs de risque classiques sont bien identifiés, et l’effet protecteur de l’activité physique est retrouvé.
 
 ---
-
