@@ -101,6 +101,23 @@ flowchart TD
     M --> N[Visualisations automatiques]
     N --> O[Interprétation & synthèse]
 
+    %% Explications à droite/gauche
+    A_desc([Lecture du CSV, conversion âge, gestion des colonnes, initialisation.]) --- A
+    B_desc([Suppression valeurs aberrantes : âge, taille, poids, pression hors normes.]) --- B
+    C_desc([Encodage binaire genre/tabac/alcool/activité, Cholestérol et Glucose ramenés à 0-2.]) --- C
+    D_desc([Création d'interactions : cholestérol×glucose, PA haute×basse, IMC, etc.]) --- D
+    E_desc([Standardisation variables continues et interactions, MinMaxScaler sur cholestérol/glucose.]) --- E
+    F_desc([Vérification moyenne/écart-type, bornes Cholestérol/Glucose, contrôle des valeurs.]) --- F
+    G_desc([Découpage chronologique : 80% train, 20% test.]) --- G
+    H_desc([Régression logistique maison, pondération des classes, régularisation L2.]) --- H
+    I_desc([Balayage seuils 0.2→0.6, choix du seuil max F1/rappel sur test.]) --- I
+    J_desc([Application du seuil optimal, obtention des classes prédictes.]) --- J
+    K_desc([Calcul accuracy, précision, rappel, F1, AUC, matrice de confusion.]) --- K
+    L_desc([Analyse par glucose, cholestérol, fumeurs, alcool, inactifs.]) --- L
+    M_desc([Génération rapport complet : stats, scores, importance, biais, conclusion.]) --- M
+    N_desc([Courbes ROC, matrice confusion, importance variables, barplots, corrélations.]) --- N
+    O_desc([Synthèse, interprétation médicale, limites, recommandations.]) --- O
+
     %% Préparation (bleu)
     style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
     style B fill:#bbdefb,stroke:#1976d2,stroke-width:2px,color:#111
@@ -121,6 +138,10 @@ flowchart TD
     %% Résultats (vert/jaune)
     style N fill:#c8e6c9,stroke:#388e3c,stroke-width:2px,color:#111
     style O fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111
+
+    %% Styles explications
+    classDef explication fill:#fff,stroke:#bdbdbd,stroke-dasharray: 2 2,color:#111,font-size:12px
+    class A_desc,B_desc,C_desc,D_desc,E_desc,F_desc,G_desc,H_desc,I_desc,J_desc,K_desc,L_desc,M_desc,N_desc,O_desc explication
 ```
 
 ### 1. **Chargement et nettoyage des données** (`data_processing.py`)
