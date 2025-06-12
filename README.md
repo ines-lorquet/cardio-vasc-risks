@@ -243,6 +243,10 @@ Le modèle reste robuste dans tous les sous-groupes, surtout pour les profils à
   L’activité physique a un effet protecteur marqué (poids négatif).  
   Les interactions (ex : PA haute x PA basse, cholestérol x activité physique) enrichissent la prédiction.  
   Tabac et alcool n’apportent aucune valeur ajoutée : leur poids est proche de zéro, ce qui est cohérent avec leur faible corrélation avec la cible et les résultats du test d’ablation.
+  **À noter** : certaines variables d’interaction ou certaines variables (par exemple, activité physique, ou des interactions comme cholestérol x activité physique) présentent un poids négatif, ce qui indique un effet protecteur ou une association inverse avec le risque.  
+  Cependant, si une variable attendue comme facteur de risque (par exemple, une interaction ou une variable clinique) présente un poids négatif alors qu’on attendrait l’inverse, cela peut s’expliquer par des effets de colinéarité, des interactions complexes ou des spécificités du jeu de données comme, par exemple, une sous-représentation dans l'ensemble de l'échantillon, ou bien une inéquité dans la proportion de malades et de sains pour la variable concernée.  
+  Il est donc important d’interpréter ces poids avec prudence et de les remettre en perspective avec la littérature médicale et le contexte clinique.
+
 
 - **Test d’ablation** :  
   Le retrait de tabac ou d’alcool n’impacte pas l’AUC du modèle (aucune perte de performance), ce qui confirme leur absence de valeur prédictive dans ce jeu de données.
