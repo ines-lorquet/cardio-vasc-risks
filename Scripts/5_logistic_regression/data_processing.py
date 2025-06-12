@@ -50,13 +50,29 @@ def load_data(filename):
                     age_years, gender_binary, height, weight, ap_hi, ap_lo,
                     cholesterol, glucose, smoke, alco, active
                 ]
-                # Ajout d'interactions
-                features.append(cholesterol * glucose)  # Interaction cholestérol × glucose
-                features.append(ap_hi * ap_lo)          # Interaction pression artérielle
+                # Ajout d'interactions existantes
+                features.append(cholesterol * glucose)  # Cholestérol x Glucose
+                features.append(ap_hi * ap_lo)          # PA haute x PA basse
                 imc = weight / ((height / 100) ** 2)
                 features.append(imc)
-                # Nouvelle interaction fumeurs x alcool
-                features.append(smoke * alco)
+                features.append(smoke * age_years)      # Fumeur x Âge
+                features.append(alco * age_years)       # Alcool x Âge
+                # Ajout des nouvelles interactions demandées
+                features.append(smoke * gender_binary)  # Tabac x Sexe
+                features.append(alco * gender_binary)   # Alcool x Sexe
+                features.append(smoke * active)         # Tabac x Activité physique
+                features.append(alco * active)          # Alcool x Activité physique
+
+                features.append(glucose * age_years)         # Glucose x Âge
+                features.append(glucose * active)            # Glucose x Activité physique
+                features.append(glucose * gender_binary)     # Glucose x Sexe
+                features.append(glucose * imc)               # Glucose x IMC
+
+                features.append(cholesterol * age_years)     # Cholestérol x Âge
+                features.append(cholesterol * active)        # Cholestérol x Activité physique
+                features.append(cholesterol * gender_binary) # Cholestérol x Sexe
+                features.append(cholesterol * imc)           # Cholestérol x IMC
+
                 X.append(features)
                 y.append(int(row['cardio']))
 
@@ -75,7 +91,7 @@ def load_data(filename):
     scaler_chol_gluc = MinMaxScaler(feature_range=(0, 2))
     X[:, 6:8] = scaler_chol_gluc.fit_transform(X[:, 6:8])
 
-    # Normalisation des features d'interaction et IMC
+    # Normalisation des nouvelles features d'interaction
     scaler_inter = StandardScaler()
     X[:, 11:] = scaler_inter.fit_transform(X[:, 11:])
 

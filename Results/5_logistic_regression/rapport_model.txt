@@ -21,58 +21,58 @@ Fumeur ET alcool : 1809 (2.64%)
 - Lignes supprimées pour valeurs aberrantes : 1501
 
 === 3. Entraînement et performance du modèle ===
-- Date : 2025-06-11 14:49:25
-- Accuracy : 0.6421 (64.21%)
+- Date : 2025-06-12 12:14:52
+- Accuracy : 0.6415 (64.15%)
 - Matrice de confusion :
-    - TP : 6199 | TN : 2598 | FP : 4321 | FN : 582
+    - TP : 6189 | TN : 2599 | FP : 4320 | FN : 592
 - Scores :
-    - Précision : 0.5893 (58.93%)
-    - Rappel : 0.9142 (91.42%)
-    - F1-score : 0.7166 (71.66%)
-- AUC (Area Under Curve) : 0.7857 (78.57%)
+    - Précision : 0.5889 (58.89%)
+    - Rappel : 0.9127 (91.27%)
+    - F1-score : 0.7159 (71.59%)
+- AUC (Area Under Curve) : 0.7854 (78.54%)
 
 === 3bis. Performances par sous-groupe ===
 ---- Glucose ----
 --- Glucose 0 (11648 échantillons) ---
-Précision : 0.5744
-Rappel : 0.9044
-F1-score : 0.7026
+Précision : 0.5738
+Rappel : 0.9031
+F1-score : 0.7018
 --- Glucose 1 (1014 échantillons) ---
-Précision : 0.6647
-Rappel : 0.9438
-F1-score : 0.7801
+Précision : 0.6667
+Rappel : 0.9421
+F1-score : 0.7808
 --- Glucose 2 (1038 échantillons) ---
-Précision : 0.6556
-Rappel : 0.9694
-F1-score : 0.7822
+Précision : 0.6563
+Rappel : 0.9664
+F1-score : 0.7817
 ---- Cholestérol ----
 --- Cholestérol 0 (10233 échantillons) ---
-Précision : 0.5420
-Rappel : 0.8833
-F1-score : 0.6718
+Précision : 0.5417
+Rappel : 0.8813
+F1-score : 0.6710
 --- Cholestérol 1 (1834 échantillons) ---
-Précision : 0.6335
-Rappel : 0.9468
-F1-score : 0.7591
+Précision : 0.6314
+Rappel : 0.9459
+F1-score : 0.7573
 --- Cholestérol 2 (1633 échantillons) ---
-Précision : 0.7581
+Précision : 0.7590
 Rappel : 0.9976
-F1-score : 0.8615
+F1-score : 0.8621
 ---- Fumeurs ----
 --- Fumeurs (1219 échantillons) ---
-Précision : 0.6217
-Rappel : 0.9013
-F1-score : 0.7358
+Précision : 0.6293
+Rappel : 0.8913
+F1-score : 0.7377
 ---- Alcool ----
 --- Alcool (749 échantillons) ---
-Précision : 0.6460
-Rappel : 0.9026
-F1-score : 0.7530
+Précision : 0.6614
+Rappel : 0.8842
+F1-score : 0.7568
 ---- Inactifs ----
 --- Inactifs (2693 échantillons) ---
-Précision : 0.6068
-Rappel : 0.9351
-F1-score : 0.7360
+Précision : 0.6029
+Rappel : 0.9379
+F1-score : 0.7340
 
 Conclusion :
 Le modèle est robuste pour détecter les malades dans tous les sous-groupes, surtout ceux à risque élevé (glucose ou cholestérol 2). Il reste prudent (beaucoup de faux positifs), ce qui est adapté à un contexte de prévention où il vaut mieux alerter trop que pas assez.
@@ -91,21 +91,34 @@ Pour améliorer la précision, il faudra travailler sur la réduction des faux p
 
 === 6. Importance des caractéristiques ===
 - Variables les plus influentes (poids absolu) :
-    - Pression artérielle haute : 0.6448
-    - Cholestérol (0-2) : 0.5030
-    - PA haute x PA basse : 0.3607
-    - Âge : 0.3557
-    - Activité physique : -0.1963
-    - Consommation d’alcool : -0.0926
-    - Tabagisme : -0.0903
-    - Poids : 0.0893
-    - Cholestérol x Glucose : -0.0741
-    - IMC : 0.0698
-    - Fumeur x Alcool : -0.0379
-    - Genre : -0.0089
+    - Pression artérielle haute : 0.6446
+    - PA haute x PA basse : 0.3604
+    - Âge : 0.3537
+    - Activité physique : -0.2125
+    - Cholestérol (0-2) : 0.1980
+    - Cholestérol x Activité physique : 0.0974
+    - Cholestérol x IMC : 0.0943
+    - Cholestérol x Glucose : -0.0871
+    - Poids : 0.0864
+    - Glucose (0-2) : 0.0747
+    - IMC : 0.0653
+    - Cholestérol x Âge : 0.0591
+    - Tabac x Activité physique : -0.0399
+    - Alcool x Âge : -0.0336
+    - Cholestérol x Sexe : 0.0223
+    - Alcool x Activité physique : -0.0187
+    - Fumeur x Âge : -0.0183
+    - Glucose x IMC : -0.0181
+    - Glucose x Activité physique : -0.0161
+    - Glucose x Sexe : -0.0148
+    - Tabagisme : 0.0118
+    - Glucose x Âge : -0.0117
+    - Consommation d’alcool : -0.0070
+    - Alcool x Sexe : -0.0058
+    - Genre : -0.0044
     - Pression artérielle basse : -0.0029
-    - Taille : -0.0021
-    - Glucose (0-2) : -0.0000
+    - Tabac x Sexe : 0.0007
+    - Taille : 0.0005
 
 === 7. Visualisations et interprétations ===
 - Matrice de confusion (`matrice_confusion.png`) : Visualise la répartition des vrais/faux positifs et négatifs.
@@ -120,4 +133,8 @@ Pour améliorer la précision, il faudra travailler sur la réduction des faux p
 - L’AUC montre que le modèle distingue bien les deux classes.
 
 === 9. Conclusion ===
-Ce modèle est adapté au dépistage : il privilégie la détection des malades (peu de faux négatifs), quitte à avoir plus de faux positifs. C’est souvent le choix en médecine préventive.
+Le modèle est cohérent avec les données : il apprend ce que tes données lui montrent, sans “forcer” des effets attendus médicalement si ceux-ci ne sont pas présents dans l’échantillon.
+Très bon rappel : il détecte la quasi-totalité des malades, ce qui est adapté à un contexte de dépistage/prévention.
+Beaucoup de faux positifs : certains sains sont à tort considérés à risque, ce qui est le prix à payer pour maximiser le rappel.
+Les variables médicales classiques dominent : pression artérielle, cholestérol, âge, IMC, poids.
+Tabac et alcool n’apportent rien : leur effet n’est pas visible dans tes données, donc le modèle ne les utilise pas.

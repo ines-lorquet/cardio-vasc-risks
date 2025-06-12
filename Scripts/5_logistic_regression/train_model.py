@@ -18,10 +18,12 @@ y_train, y_test = y[:split], y[split:]
 # Liste des noms de caractéristiques mises à jour
 feature_names = [
     'Âge', 'Genre', 'Taille', 'Poids', 'Pression artérielle haute', 'Pression artérielle basse',
-    'Cholestérol (0-2)', 'Glucose (0-2)',
-    'Tabagisme', 'Consommation d’alcool', 'Activité physique',
+    'Cholestérol (0-2)', 'Glucose (0-2)', 'Tabagisme', 'Consommation d’alcool', 'Activité physique',
     'Cholestérol x Glucose', 'PA haute x PA basse', 'IMC',
-    'Fumeur x Alcool'
+    'Fumeur x Âge', 'Alcool x Âge',
+    'Tabac x Sexe', 'Alcool x Sexe', 'Tabac x Activité physique', 'Alcool x Activité physique',
+    'Glucose x Âge', 'Glucose x Activité physique', 'Glucose x Sexe', 'Glucose x IMC',
+    'Cholestérol x Âge', 'Cholestérol x Activité physique', 'Cholestérol x Sexe', 'Cholestérol x IMC'
 ]
 
 

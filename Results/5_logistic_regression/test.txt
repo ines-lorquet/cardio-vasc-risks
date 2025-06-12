@@ -1,0 +1,10 @@
+Idées d’interactions supplémentaires :
+
+Âge × Cholestérol : le risque lié au cholestérol augmente avec l’âge.
+Âge × Glucose : idem, le diabète est plus risqué avec l’âge.
+IMC × Activité physique : un IMC élevé est moins risqué chez les actifs.
+Tabac × Alcool × Sexe : les effets combinés peuvent différer selon le genre.
+Pression artérielle haute × IMC : l’hypertension est aggravée par le surpoids.
+2. Ajout de variables non linéaires
+Carrés ou racines de certaines variables (ex : (âge)^2, (IMC)^2) pour capter des effets non linéaires.
+Catégorisation de l’âge (jeune/adulte/senior) ou de l’IMC (normal/surpoids/obèse).
