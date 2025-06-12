@@ -30,6 +30,15 @@ Le jeu de données contient les variables suivantes :
 - **Variables d’interaction** : _cholestérol × glucose, PA haute × basse, IMC, fumeur × âge, etc._
 - **Cible** : _présence ou non d’un risque cardiovasculaire_
 
+**Précisions sur le codage des variables médicales :**
+- **Cholestérol** et **Glucose** sont codés sur 3 niveaux :
+    - **0** : valeur normale
+    - **1** : au-dessus de la normale
+    - **2** : bien au-dessus de la normale
+  Ces valeurs sont issues d’un score médical initial (1, 2, 3) ramené à (0, 1, 2) pour le traitement.
+- **Genre** est encodé en binaire (0 ou 1).
+- **Tabac**, **alcool** et **activité physique** sont encodés en 0 (non) ou 1 (oui).
+
 ---
 
 ## 3. 🧹 **Prétraitement et Nettoyage**
@@ -38,6 +47,12 @@ Le jeu de données contient les variables suivantes :
 - **Encodage** : transformation des variables catégorielles en numériques.
 - **Normalisation** : standardisation des variables continues pour faciliter l’apprentissage.
 - **Création de variables d’interaction** pour enrichir l’information (_ex : cholestérol × glucose, IMC_).
+
+**Détail sur la normalisation appliquée :**
+- Les variables continues principales (_âge, genre, taille, poids, pression artérielle haute et basse_) sont normalisées avec un **StandardScaler** (moyenne 0, écart-type 1).
+- **Cholestérol** et **Glucose** sont normalisés avec un **MinMaxScaler** sur l’intervalle [0, 2], ce qui garantit que leurs valeurs restent dans les bornes attendues (0, 1, 2).
+- Toutes les variables d’interaction (produits de variables, IMC, etc.) sont également normalisées avec un **StandardScaler**.
+- Ce traitement permet de garantir que chaque variable a une influence comparable lors de l’entraînement du modèle, sans biais dû à l’échelle des valeurs.
 
 ---
 
@@ -86,6 +101,18 @@ Le jeu de données contient les variables suivantes :
   - _Exemples : cholestérol × glucose, PA haute × basse, IMC, fumeur × âge, alcool × âge, etc._
 - **Normalisation** :  
   - Variables continues standardisées (`StandardScaler`), cholestérol et glucose mis à l’échelle sur [0,2] (`MinMaxScaler`), interactions aussi standardisées.
+
+**Explication détaillée du traitement des données :**
+- **Âge** est converti de jours en années.
+- **Genre** est encodé en binaire (0 ou 1).
+- **Cholestérol** et **Glucose** sont ramenés à des scores 0, 1, 2 (voir plus haut).
+- **Tabac**, **alcool** et **activité physique** sont encodés en 0 (non) ou 1 (oui).
+- **Variables d’interaction** : le script crée de nombreuses variables supplémentaires en multipliant certaines variables entre elles (ex : cholestérol × glucose, PA haute × PA basse, IMC, etc.) pour capturer des effets combinés.
+- **Normalisation** :
+    - Les 6 premières variables (âge, genre, taille, poids, PA haute, PA basse) sont normalisées avec un StandardScaler (moyenne 0, écart-type 1).
+    - Cholestérol et glucose sont normalisés avec un MinMaxScaler sur [0, 2].
+    - Toutes les variables d’interaction sont normalisées avec un StandardScaler.
+- **But de la normalisation** : mettre toutes les variables sur des échelles comparables pour éviter qu’une variable n’ait trop d’influence simplement à cause de son ordre de grandeur.
 
 ### 2. **Séparation train/test**
 
