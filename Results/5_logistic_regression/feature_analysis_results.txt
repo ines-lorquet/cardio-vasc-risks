@@ -1,0 +1,70 @@
+=== Proportion de malades selon tabac/alcool ===
+Tabagisme=0 : 49.71% de malades (62471 cas)
+Tabagisme=1 : 46.81% de malades (6028 cas)
+Consommation d’alcool=0 : 49.55% de malades (64836 cas)
+Consommation d’alcool=1 : 47.67% de malades (3663 cas)
+
+=== Corrélation avec la cible ===
+Malade                             1.000000
+Pression artérielle haute          0.429395
+PA haute x PA basse                0.413276
+Pression artérielle basse          0.339352
+Âge                                0.239475
+Cholestérol x IMC                  0.227187
+Cholestérol x Âge                  0.225621
+Cholestérol (0-2)                  0.221305
+Cholestérol x Activité physique    0.192675
+IMC                                0.191154
+Poids                              0.179345
+Cholestérol x Sexe                 0.116722
+Cholestérol x Glucose              0.105064
+Glucose x IMC                      0.099116
+Glucose x Âge                      0.096083
+Glucose (0-2)                      0.089399
+Glucose x Activité physique        0.074835
+Glucose x Sexe                     0.042753
+Genre                              0.006959
+Alcool x Âge                      -0.001469
+Fumeur x Âge                      -0.008019
+Consommation d’alcool             -0.008498
+Alcool x Sexe                     -0.009294
+Alcool x Activité physique        -0.012385
+Taille                            -0.012865
+Tabac x Sexe                      -0.015320
+Tabagisme                         -0.016393
+Tabac x Activité physique         -0.023995
+Activité physique                 -0.037776
+Name: Malade, dtype: float64
+
+=== Test d’ablation (retrait d’une variable à la fois) ===
+Modèle complet AUC : 0.7700
+Sans 'Âge' : AUC = 0.7700 (diff = +0.0000)
+Sans 'Genre' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Taille' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Poids' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Pression artérielle haute' : AUC = 0.7840 (diff = +0.0140)
+Sans 'Pression artérielle basse' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Cholestérol (0-2)' : AUC = 0.7853 (diff = +0.0154)
+Sans 'Glucose (0-2)' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Tabagisme' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Consommation d’alcool' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Activité physique' : AUC = 0.7846 (diff = +0.0146)
+Sans 'Cholestérol x Glucose' : AUC = 0.7851 (diff = +0.0151)
+Sans 'PA haute x PA basse' : AUC = 0.7850 (diff = +0.0151)
+Sans 'IMC' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Fumeur x Âge' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Alcool x Âge' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Tabac x Sexe' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Alcool x Sexe' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Tabac x Activité physique' : AUC = 0.7855 (diff = +0.0155)
+Sans 'Alcool x Activité physique' : AUC = 0.7855 (diff = +0.0155)
+Sans 'Glucose x Âge' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Glucose x Activité physique' : AUC = 0.7855 (diff = +0.0155)
+Sans 'Glucose x Sexe' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Glucose x IMC' : AUC = 0.7854 (diff = +0.0155)
+Sans 'Cholestérol x Âge' : AUC = 0.7854 (diff = +0.0154)
+Sans 'Cholestérol x Activité physique' : AUC = 0.7855 (diff = +0.0155)
+Sans 'Cholestérol x Sexe' : AUC = 0.7855 (diff = +0.0155)
+Sans 'Cholestérol x IMC' : AUC = 0.7854 (diff = +0.0154)
+
+Analyse terminée.

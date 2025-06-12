@@ -21,7 +21,7 @@ Fumeur ET alcool : 1809 (2.64%)
 - Lignes supprimées pour valeurs aberrantes : 1501
 
 === 3. Entraînement et performance du modèle ===
-- Date : 2025-06-12 12:14:52
+- Date : 2025-06-12 12:39:46
 - Accuracy : 0.6415 (64.15%)
 - Matrice de confusion :
     - TP : 6189 | TN : 2599 | FP : 4320 | FN : 592
@@ -133,8 +133,4 @@ Pour améliorer la précision, il faudra travailler sur la réduction des faux p
 - L’AUC montre que le modèle distingue bien les deux classes.
 
 === 9. Conclusion ===
-Le modèle est cohérent avec les données : il apprend ce que tes données lui montrent, sans “forcer” des effets attendus médicalement si ceux-ci ne sont pas présents dans l’échantillon.
-Très bon rappel : il détecte la quasi-totalité des malades, ce qui est adapté à un contexte de dépistage/prévention.
-Beaucoup de faux positifs : certains sains sont à tort considérés à risque, ce qui est le prix à payer pour maximiser le rappel.
-Les variables médicales classiques dominent : pression artérielle, cholestérol, âge, IMC, poids.
-Tabac et alcool n’apportent rien : leur effet n’est pas visible dans tes données, donc le modèle ne les utilise pas.
+Ce modèle est adapté au dépistage : il privilégie la détection des malades (peu de faux négatifs), quitte à avoir plus de faux positifs. C’est souvent le choix en médecine préventive.
