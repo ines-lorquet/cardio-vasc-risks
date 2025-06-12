@@ -102,25 +102,25 @@ flowchart TD
     N --> O[Interprétation & synthèse]
 
     %% Préparation (bleu)
-    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style B fill:#bbdefb,stroke:#1976d2,stroke-width:2px
-    style C fill:#90caf9,stroke:#1976d2,stroke-width:2px
-    style D fill:#64b5f6,stroke:#1976d2,stroke-width:2px
-    style E fill:#42a5f5,stroke:#1976d2,stroke-width:2px
-    style F fill:#29b6f6,stroke:#0288d1,stroke-width:2px
-    style G fill:#4dd0e1,stroke:#00838f,stroke-width:2px
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style B fill:#bbdefb,stroke:#1976d2,stroke-width:2px,color:#111
+    style C fill:#90caf9,stroke:#1976d2,stroke-width:2px,color:#111
+    style D fill:#64b5f6,stroke:#1976d2,stroke-width:2px,color:#111
+    style E fill:#42a5f5,stroke:#1976d2,stroke-width:2px,color:#111
+    style F fill:#29b6f6,stroke:#0288d1,stroke-width:2px,color:#111
+    style G fill:#4dd0e1,stroke:#00838f,stroke-width:2px,color:#111
 
     %% Modélisation (orange/rose)
-    style H fill:#ffe0b2,stroke:#fb8c00,stroke-width:2px
-    style I fill:#ffcc80,stroke:#fb8c00,stroke-width:2px
-    style J fill:#ffb74d,stroke:#f57c00,stroke-width:2px
-    style K fill:#ff8a65,stroke:#d84315,stroke-width:2px
-    style L fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
-    style M fill:#f06292,stroke:#ad1457,stroke-width:2px
+    style H fill:#ffe0b2,stroke:#fb8c00,stroke-width:2px,color:#111
+    style I fill:#ffcc80,stroke:#fb8c00,stroke-width:2px,color:#111
+    style J fill:#ffb74d,stroke:#f57c00,stroke-width:2px,color:#111
+    style K fill:#ff8a65,stroke:#d84315,stroke-width:2px,color:#111
+    style L fill:#f8bbd0,stroke:#c2185b,stroke-width:2px,color:#111
+    style M fill:#f06292,stroke:#ad1457,stroke-width:2px,color:#111
 
     %% Résultats (vert/jaune)
-    style N fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
-    style O fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style N fill:#c8e6c9,stroke:#388e3c,stroke-width:2px,color:#111
+    style O fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111
 ```
 
 ### 1. **Chargement et nettoyage des données** (`data_processing.py`)
