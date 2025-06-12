@@ -1,7 +1,7 @@
 from data_processing import load_data, describe_dataset, split_by_glucose, filter_inactive
 from logistic_regression import LogisticRegression
 from metrics import confusion_matrix, classification_report, subgroup_performance
-from visualization import plot_confusion_matrix, plot_roc_curve, plot_feature_importance, plot_correlation_matrix
+from visualization import plot_confusion_matrix, plot_roc_curve, plot_feature_importance, plot_correlation_matrix, plot_summary_barplot, plot_proportion_malades_by_variable
 from report import generate_report
 import numpy as np
 
@@ -28,6 +28,7 @@ feature_names = [
 
 
 plot_correlation_matrix(X_train, y_train, feature_names)
+plot_proportion_malades_by_variable(X, y, feature_names)  
 
 
 # Entraînement du modèle
@@ -46,6 +47,7 @@ print(classification_report(TP, TN, FP, FN))
 plot_confusion_matrix(TP, TN, FP, FN)
 plot_roc_curve(y_test, y_pred_proba)
 plot_feature_importance(model.weights, feature_names)
+plot_summary_barplot()
 
 # Séparation des sous-groupes par niveau de glucose
 (_, y_low), (_, y_medium), (_, y_high) = split_by_glucose(X_test, y_test, feature_names)

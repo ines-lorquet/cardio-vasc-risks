@@ -191,6 +191,14 @@ La normalisation appliquée est correcte :
 - **Fumeur ET alcool** : _2,64 %_
 - **Lignes supprimées pour valeurs aberrantes** : _1 501_
 
+#### **Résumé visuel des proportions principales**
+
+![Résumé des proportions principales](Results/5_logistic_regression/summary_barplot.png)
+
+#### **Proportion de malades par variable, modalité et sous-groupe**
+
+![Proportion de malades par variable](Results/5_logistic_regression/proportion_malades_by_variable.png)
+
 **Proportion de malades selon tabac/alcool**
 
 - **Non fumeur** : _49,71 % de malades (62 471 cas)_

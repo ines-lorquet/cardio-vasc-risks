@@ -68,3 +68,70 @@ def plot_correlation_matrix(X, y, feature_names):
     plt.savefig("Results/5_logistic_regression/correlation_matrix.png")
     plt.close()
 
+def plot_summary_barplot():
+    """Affiche un barplot des proportions principales du jeu de données."""
+    categories = [
+        "Malades", "Sains", "Cholestérol 2", "Glucose 2", "Fumeurs", "Alcool",
+        "Ni fumeur ni alcool", "Non fumeur seul (alcool oui)", "Non alcool seul (fumeur oui)", "Fumeur ET alcool"
+    ]
+    proportions = [
+        49.45, 50.55, 11.46, 7.60, 8.80, 5.35, 88.49, 2.71, 6.16, 2.64
+    ]
+
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=proportions, y=categories, palette="viridis")
+    plt.xlabel("Pourcentage (%)")
+    plt.title("Résumé des proportions principales du jeu de données")
+    plt.xlim(0, 100)
+    plt.tight_layout()
+    plt.savefig("Results/5_logistic_regression/summary_barplot.png")
+    plt.close()
+
+def plot_proportion_malades_by_variable(X, y, feature_names):
+    """
+    Affiche un barplot de la proportion de malades (y=1) pour chaque modalité de variables catégorielles principales,
+    y compris actifs, ni alcool ni tabac, alcool ET tabac.
+    """
+    import pandas as pd
+
+    df = pd.DataFrame(X, columns=feature_names)
+    df['Malade'] = y
+
+    variables = [
+        ("Cholestérol (0-2)", [0, 1, 2]),
+        ("Glucose (0-2)", [0, 1, 2]),
+        ("Tabagisme", [0, 1]),
+        ("Consommation d’alcool", [0, 1]),
+        ("Activité physique", [0, 1])
+    ]
+
+    # Groupes personnalisés
+    groupes = {
+        "Actifs": (df["Activité physique"] == 1),
+        "Ni alcool ni tabac": (df["Tabagisme"] == 0) & (df["Consommation d’alcool"] == 0),
+        "Alcool ET tabac": (df["Tabagisme"] == 1) & (df["Consommation d’alcool"] == 1)
+    }
+
+    plt.figure(figsize=(12, 7))
+    # Variables classiques
+    for i, (var, vals) in enumerate(variables):
+        for j, v in enumerate(vals):
+            mask = df[var] == v
+            if mask.sum() > 0:
+                prop = df.loc[mask, 'Malade'].mean() * 100
+                plt.bar(f"{var}={v}", prop, color=sns.color_palette("tab10")[i])
+                plt.text(f"{var}={v}", prop + 0.5, f"{prop:.1f}%", ha='center', fontsize=8)
+    # Groupes personnalisés
+    for k, (label, mask) in enumerate(groupes.items()):
+        if mask.sum() > 0:
+            prop = df.loc[mask, 'Malade'].mean() * 100
+            plt.bar(label, prop, color="gray")
+            plt.text(label, prop + 0.5, f"{prop:.1f}%", ha='center', fontsize=9, fontweight='bold')
+
+    plt.ylabel("Proportion de malades (%)")
+    plt.title("Proportion de malades par variable, modalité et sous-groupe")
+    plt.xticks(rotation=30, ha='right')
+    plt.tight_layout()
+    plt.savefig("Results/5_logistic_regression/proportion_malades_by_variable.png")
+    plt.close()
+
