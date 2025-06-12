@@ -84,6 +84,7 @@ Le jeu de données contient les variables suivantes :
 
 ## 6. 🛠️ **Fonctionnement détaillé du Programme et des Scripts**
 
+```mermaid
 flowchart TD
     A[Chargement des données<br>cardio_train_clean.csv] --> B[Nettoyage des données<br>(suppression valeurs aberrantes)]
     B --> C[Encodage des variables<br>(catégorielles → numériques)]
@@ -106,6 +107,7 @@ flowchart TD
     style M fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
     style N fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
     style O fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+```
 
 ### 1. **Chargement et nettoyage des données** (`data_processing.py`)
 
