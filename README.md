@@ -63,27 +63,7 @@ Le jeu de données contient les variables suivantes :
 
 ---
 
-## 6. Visualisations
-
-- **Matrice de corrélation**  
-  ![Matrice de corrélation](Results/5_logistic_regression/correlation_matrix.png)  
-  Montre les corrélations entre toutes les variables et la cible.
-
-- **Matrice de confusion**  
-  ![Matrice de confusion](Results/5_logistic_regression/matrice_confusion.png)  
-  Visualise la répartition des vrais/faux positifs et négatifs.
-
-- **Importance des variables**  
-  ![Importance des variables](Results/5_logistic_regression/feature_importance.png)  
-  Indique quelles variables influencent le plus la prédiction.
-
-- **Courbe ROC**  
-  ![Courbe ROC](Results/5_logistic_regression/roc_curve.png)  
-  Visualise la capacité du modèle à distinguer malades/sains (AUC = 0.7854).
-
----
-
-## 7. Fonctionnement détaillé du Programme et des Scripts
+## 6. Fonctionnement détaillé du Programme et des Scripts
 
 ### 1. Chargement et nettoyage des données (`data_processing.py`)
 
@@ -139,7 +119,7 @@ Le jeu de données contient les variables suivantes :
   - **But** : Vérifier l’équité du modèle et détecter d’éventuels biais.
 
 
-## 6. Résultats
+## 7. Résultats
 
 ### Statistiques globales
 
