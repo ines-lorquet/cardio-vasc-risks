@@ -60,7 +60,7 @@ Le jeu de données contient les variables suivantes :
 - **Fonctionnement** :
   - Combinaison linéaire pondérée des variables d’entrée
   - Application d’une fonction sigmoïde
-  - Classification selon un seuil (_par défaut 0.45_)
+  - Classification selon un seuil (_**0.20**_, déterminé automatiquement)
 - **Pondération des classes** : `pos_weight=2.0` (_compense le déséquilibre, favorise la détection des malades_)
 - **Régularisation L2** : pénalité pour éviter le surapprentissage (`l2=0.01`)
 - **Séparation des données** : _80 % entraînement, 20 % test_
@@ -76,6 +76,7 @@ Le jeu de données contient les variables suivantes :
   - **F1-score**
   - **AUC** (_aire sous la courbe ROC_)
 - **Analyse par sous-groupes** : _performances évaluées pour différents sous-groupes (glucose, cholestérol, fumeurs, alcool, inactifs) pour vérifier l’équité du modèle._
+- **Seuil de classification utilisé** : **0.20** (_voir ci-dessous l'impact sur les performances_)
 
 ---
 
@@ -309,35 +310,36 @@ La normalisation appliquée est correcte :
 
 ### **Performances globales**
 
-- **TP** : _6193_
-- **TN** : _2601_
-- **FP** : _4318_
-- **FN** : _588_
-- **Accuracy** : **64,2 %**
-- **Précision** : **58,9 %**
-- **Rappel** : **91,3 %**
-- **F1-score** : **71,6 %**
-- **AUC** : **78,6 %**
 
-> **Le modèle privilégie la détection des malades (rappel élevé), ce qui est adapté à la prévention, mais au prix d’un taux de faux positifs élevé.**
+- **TP** : _6 738_
+- **TN** : _365_
+- **FP** : _6 554_
+- **FN** : _43_
+- **Accuracy** : **51,9 %**
+- **Précision** : **50,7 %**
+- **Rappel** : **99,4 %**
+- **F1-score** : **67,1 %**
+- **AUC** : **78,5 %**
+
+> **Avec le seuil abaissé à 0.20, le modèle détecte quasiment tous les malades (rappel ≈ 99 %), mais au prix d’un taux de faux positifs très élevé (précision ≈ 51 %).**
 
 ---
 
-### **Performances par sous-groupes**
+### **Performances par sous-groupes (seuil 0.20)**
 
 | **Sous-groupe**    | **Précision** | **Rappel** | **F1-score** |
 |--------------------|:-------------:|:----------:|:------------:|
-| Glucose 0          | 0.57          | 0.90       | 0.70         |
-| Glucose 1          | 0.67          | 0.94       | 0.78         |
-| Glucose 2          | 0.66          | 0.97       | 0.78         |
-| Cholestérol 0      | 0.54          | 0.88       | 0.67         |
-| Cholestérol 1      | 0.63          | 0.95       | 0.76         |
-| Cholestérol 2      | 0.76          | 1.00       | 0.86         |
-| Fumeurs            | 0.63          | 0.89       | 0.74         |
-| Alcool             | 0.66          | 0.88       | 0.76         |
-| Inactifs           | 0.60          | 0.94       | 0.73         |
+| Glucose 0          | 0.49          | 0.99       | 0.65         |
+| Glucose 1          | 0.60          | 0.99       | 0.75         |
+| Glucose 2          | 0.63          | 1.00       | 0.78         |
+| Cholestérol 0      | 0.45          | 0.99       | 0.62         |
+| Cholestérol 1      | 0.60          | 1.00       | 0.75         |
+| Cholestérol 2      | 0.75          | 1.00       | 0.86         |
+| Fumeurs            | 0.50          | 1.00       | 0.67         |
+| Alcool             | 0.53          | 0.99       | 0.69         |
+| Inactifs           | 0.54          | 1.00       | 0.70         |
 
-> **Le modèle reste robuste dans tous les sous-groupes, surtout pour les profils à risque élevé (glucose ou cholestérol 2).**
+> **Le modèle reste extrêmement sensible dans tous les sous-groupes, mais la précision est modérée, surtout pour les groupes majoritaires.**
 
 ---
 
@@ -427,12 +429,11 @@ La normalisation appliquée est correcte :
 
 ## **🟩 Interprétation globale et conclusion**
 
-- **Le modèle détecte très bien les malades (rappel élevé), ce qui est crucial en santé publique.**
-- **Il fait cependant beaucoup de faux positifs (précision modérée), donc certains sains sont à tort considérés à risque.**
+- **Le choix d’un seuil bas (0.20) maximise le rappel (sensibilité) : le modèle détecte presque tous les malades, ce qui est crucial en santé publique.**
+- **En contrepartie, la précision chute : beaucoup de personnes saines sont faussement classées à risque (faux positifs élevés).**
+- **Ce compromis est assumé** : il est préférable, en prévention, de ne pas rater de malades, même si cela implique d’alerter trop de personnes.
 - **Les variables médicales classiques dominent la prédiction.**
 - **Tabac et alcool n’apportent aucune valeur prédictive** : leur retrait n’impacte pas la performance du modèle (_corrélation négative ou nulle, test d’ablation sans effet_).
-- **Un choix méthodologique a été fait** : privilégier la réduction des faux négatifs (_donc maximiser le rappel_), quitte à augmenter le nombre de faux positifs et à réduire la précision.  
-  _Ce compromis est assumé car il est préférable, en santé publique, d’alerter trop que pas assez pour ne pas manquer de personnes à risque._
 
 ---
 
@@ -458,7 +459,8 @@ La normalisation appliquée est correcte :
 ## **🟨 Limites et pistes d’amélioration**
 
 - _Le modèle repose uniquement sur des variables cliniques de base : l’ajout de données biologiques, génétiques ou de suivi longitudinal pourrait améliorer la précision._
-- _Le taux de faux positifs reste élevé, ce qui peut entraîner une sur-sollicitation du système de santé ou un stress inutile pour certains patients._
+- _Le taux de faux positifs est très élevé avec ce seuil : il faudra envisager des stratégies pour affiner la sélection des personnes à risque (modèles plus complexes, ajout de variables, ou double seuil pour un triage plus fin)._  
+- _Le modèle reste néanmoins un excellent outil de dépistage initial, à compléter par des examens médicaux plus spécifiques pour limiter les fausses alertes._
 - _La régression logistique, bien que transparente, ne capture pas forcément des relations non linéaires complexes : des modèles plus avancés (arbres, réseaux de neurones) pourraient être explorés._
 - _Les variables tabac et alcool n’apportent pas de valeur ajoutée ici, mais cela peut être lié à la qualité ou à la déclaration de ces données dans ce jeu précis._
 - _Le modèle n’a pas été testé sur des données externes : une validation sur d’autres cohortes serait nécessaire pour confirmer sa robustesse._

@@ -36,7 +36,7 @@ model = LogisticRegression(learning_rate=0.1, epochs=5000, l2=0.01)
 model.fit(X_train, y_train, pos_weight=2.0)
 
 # Prédictions
-y_pred = model.predict(X_test, threshold=0.45)
+y_pred = model.predict(X_test, threshold=0.20)
 y_pred_proba = model.predict_proba(X_test)
 
 # Calcul des métriques
@@ -55,9 +55,9 @@ plot_summary_barplot()
 # Calcul des performances par sous-groupe (à placer AVANT generate_report)
 # Glucose
 (glucose0_X, glucose0_y), (glucose1_X, glucose1_y), (glucose2_X, glucose2_y) = split_by_glucose(X_test, y_test, feature_names)
-y_pred_g0 = model.predict(glucose0_X, threshold=0.45)
-y_pred_g1 = model.predict(glucose1_X, threshold=0.45)
-y_pred_g2 = model.predict(glucose2_X, threshold=0.45)
+y_pred_g0 = model.predict(glucose0_X, threshold=0.20)
+y_pred_g1 = model.predict(glucose1_X, threshold=0.20)
+y_pred_g2 = model.predict(glucose2_X, threshold=0.20)
 perf_glucose = ""
 perf_glucose += subgroup_performance(glucose0_y, y_pred_g0, "Glucose 0")
 perf_glucose += subgroup_performance(glucose1_y, y_pred_g1, "Glucose 1")
@@ -68,25 +68,25 @@ chol_idx = feature_names.index("Cholestérol (0-2)")
 perf_chol = ""
 for val in [0, 1, 2]:
     mask = X_test[:, chol_idx] == val
-    y_pred_chol = model.predict(X_test[mask], threshold=0.45)
+    y_pred_chol = model.predict(X_test[mask], threshold=0.20)
     perf_chol += subgroup_performance(y_test[mask], y_pred_chol, f"Cholestérol {val}")
 
 # Fumeurs
 fumeur_idx = feature_names.index("Tabagisme")
 mask_fumeur = X_test[:, fumeur_idx] == 1
-y_pred_fumeur = model.predict(X_test[mask_fumeur], threshold=0.45)
+y_pred_fumeur = model.predict(X_test[mask_fumeur], threshold=0.20)
 perf_fumeur = subgroup_performance(y_test[mask_fumeur], y_pred_fumeur, "Fumeurs")
 
 # Alcool
 alcool_idx = feature_names.index("Consommation d’alcool")
 mask_alcool = X_test[:, alcool_idx] == 1
-y_pred_alcool = model.predict(X_test[mask_alcool], threshold=0.45)
+y_pred_alcool = model.predict(X_test[mask_alcool], threshold=0.20)
 perf_alcool = subgroup_performance(y_test[mask_alcool], y_pred_alcool, "Alcool")
 
 # Inactifs
 from data_processing import filter_inactive
 X_inactif, y_inactif = filter_inactive(X_test, y_test, feature_names)
-y_pred_inactif = model.predict(X_inactif, threshold=0.45)
+y_pred_inactif = model.predict(X_inactif, threshold=0.20)
 perf_inactif = subgroup_performance(y_inactif, y_pred_inactif, "Inactifs")
 
 # Rapport complet (à placer APRÈS le calcul des sous-groupes)

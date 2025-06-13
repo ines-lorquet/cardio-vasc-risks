@@ -21,58 +21,58 @@ Fumeur ET alcool : 1809 (2.64%)
 - Lignes supprimées pour valeurs aberrantes : 1501
 
 === 3. Entraînement et performance du modèle ===
-- Date : 2025-06-12 12:39:46
-- Accuracy : 0.6415 (64.15%)
+- Date : 2025-06-13 11:01:31
+- Accuracy : 0.5185 (51.85%)
 - Matrice de confusion :
-    - TP : 6189 | TN : 2599 | FP : 4320 | FN : 592
+    - TP : 6738 | TN : 365 | FP : 6554 | FN : 43
 - Scores :
-    - Précision : 0.5889 (58.89%)
-    - Rappel : 0.9127 (91.27%)
-    - F1-score : 0.7159 (71.59%)
+    - Précision : 0.5069 (50.69%)
+    - Rappel : 0.9937 (99.37%)
+    - F1-score : 0.6713 (67.13%)
 - AUC (Area Under Curve) : 0.7854 (78.54%)
 
 === 3bis. Performances par sous-groupe ===
 ---- Glucose ----
 --- Glucose 0 (11648 échantillons) ---
-Précision : 0.5738
-Rappel : 0.9031
-F1-score : 0.7018
+Précision : 0.4868
+Rappel : 0.9935
+F1-score : 0.6534
 --- Glucose 1 (1014 échantillons) ---
-Précision : 0.6667
-Rappel : 0.9421
-F1-score : 0.7808
+Précision : 0.6032
+Rappel : 0.9901
+F1-score : 0.7497
 --- Glucose 2 (1038 échantillons) ---
-Précision : 0.6563
-Rappel : 0.9664
-F1-score : 0.7817
+Précision : 0.6346
+Rappel : 0.9985
+F1-score : 0.7760
 ---- Cholestérol ----
 --- Cholestérol 0 (10233 échantillons) ---
-Précision : 0.5417
-Rappel : 0.8813
-F1-score : 0.6710
+Précision : 0.4498
+Rappel : 0.9913
+F1-score : 0.6188
 --- Cholestérol 1 (1834 échantillons) ---
-Précision : 0.6314
-Rappel : 0.9459
-F1-score : 0.7573
+Précision : 0.5977
+Rappel : 0.9963
+F1-score : 0.7472
 --- Cholestérol 2 (1633 échantillons) ---
-Précision : 0.7590
-Rappel : 0.9976
-F1-score : 0.8621
+Précision : 0.7506
+Rappel : 1.0000
+F1-score : 0.8575
 ---- Fumeurs ----
 --- Fumeurs (1219 échantillons) ---
-Précision : 0.6293
-Rappel : 0.8913
-F1-score : 0.7377
+Précision : 0.5047
+Rappel : 0.9950
+F1-score : 0.6697
 ---- Alcool ----
 --- Alcool (749 échantillons) ---
-Précision : 0.6614
-Rappel : 0.8842
-F1-score : 0.7568
+Précision : 0.5251
+Rappel : 0.9921
+F1-score : 0.6867
 ---- Inactifs ----
 --- Inactifs (2693 échantillons) ---
-Précision : 0.6029
-Rappel : 0.9379
-F1-score : 0.7340
+Précision : 0.5425
+Rappel : 0.9965
+F1-score : 0.7026
 
 Conclusion :
 Le modèle est robuste pour détecter les malades dans tous les sous-groupes, surtout ceux à risque élevé (glucose ou cholestérol 2). Il reste prudent (beaucoup de faux positifs), ce qui est adapté à un contexte de prévention où il vaut mieux alerter trop que pas assez.
