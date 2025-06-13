@@ -2,6 +2,53 @@
 
 ---
 
+# 🏫 Présentation du projet et comparaison des approches (Job 4 & 5)
+
+## 🎓 **Projet d'école – Approches comparées (Job 4 & 5)**
+
+Ce projet s'inscrit dans le cadre d'un exercice académique visant à comparer deux approches de la régression logistique pour la prédiction du risque cardiovasculaire :
+
+- **Job 4** : Régression logistique avec la librairie **Scikit-Learn**
+- **Job 5** : Régression logistique **implémentée à la main** (classe Python personnalisée)
+
+L'objectif est d'identifier les personnes à risque à partir de données médicales, en mettant l'accent sur la robustesse, la transparence et l'équité du modèle, tout en évaluant les avantages et limites de chaque méthode.
+
+---
+
+
+## 🛠️ Évaluation et comparaison succincte des deux approches**
+
+Pour répondre à la consigne, une régression logistique a été réalisée avec la librairie **Scikit-Learn** en parallèle de l’implémentation maison. Voici la comparaison des deux méthodes :
+
+| **Critère**              | **Scikit-Learn**                           | **Classe maison**                       |
+|--------------------------|--------------------------------------------|-----------------------------------------|
+| Facilité d’utilisation   | Très simple, rapide à tester               | Plus complexe, mais personnalisable     |
+| Recherche du seuil       | Par défaut à 0.5, ajustable manuellement   | Recherche automatique du seuil optimal  |
+| Pondération des classes  | `class_weight` facile à activer            | Paramètre `pos_weight` implémenté       |
+| Résultats (rappel)       | Rappel élevé si `class_weight` adapté      | Rappel très élevé (optimisé)            |
+| Interprétabilité         | Bonne (coefficients accessibles)           | Excellente (contrôle total)             |
+
+**Conclusion :**
+- Les deux approches donnent des résultats proches si les paramètres sont bien choisis.
+- La classe maison permet d’optimiser le seuil et la pondération pour maximiser le rappel, ce qui est crucial ici.
+- Scikit-Learn est plus rapide à mettre en œuvre, mais moins flexible pour la recherche automatique du seuil optimal.
+
+### 📈 **Quelle métrique privilégier ?**
+
+Dans ce cas d’étude (dépistage de risque cardiovasculaire), **le rappel (recall)** est la métrique la plus adaptée :
+
+- Il est crucial de détecter le maximum de personnes à risque (minimiser les faux négatifs).
+- Une précision plus faible (plus de faux positifs) est acceptable en prévention.
+
+**Justification :**
+> Le rappel mesure la proportion de vrais malades détectés. En santé publique, il vaut mieux alerter trop que de rater des personnes réellement à risque.
+
+**À retenir :**
+> Pour ce cas d’étude, la métrique la plus adaptée est le **rappel (recall)**, car il est essentiel de minimiser les faux négatifs et de détecter tous les individus à risque, quitte à avoir plus de faux positifs.
+
+---
+
+# 🔬 Analyse avancée du script maison et résultats détaillés
 
 ## 1. 🎯 **Contexte et Objectif**
 
