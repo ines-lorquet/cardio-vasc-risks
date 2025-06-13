@@ -2,9 +2,6 @@
 
 ---
 
-# **Job 5 : Régression Logistique (fait main)**
-
----
 
 ## 1. 🎯 **Contexte et Objectif**
 
