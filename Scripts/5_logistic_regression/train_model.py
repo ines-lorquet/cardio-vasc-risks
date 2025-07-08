@@ -106,18 +106,22 @@ print("- Importance des caractéristiques : feature_importance.png")
 
 from metrics import classification_report
 
+# Recherche du meilleur seuil de classification en testant plusieurs valeurs
 best_f1 = 0
 best_recall = 0
 best_threshold = 0.5
-for threshold in np.arange(0.2, 0.61, 0.01):
-    y_pred = model.predict(X_test, threshold=threshold)
-    TP, TN, FP, FN = confusion_matrix(y_test, y_pred)
-    report = classification_report(TP, TN, FP, FN)
+for threshold in np.arange(0.2, 0.61, 0.01):  # On teste 41 seuils de 0.20 à 0.60
+    y_pred = model.predict(X_test, threshold=threshold)  # Prédiction avec le seuil courant
+    TP, TN, FP, FN = confusion_matrix(y_test, y_pred)    # Calcul de la matrice de confusion
+    report = classification_report(TP, TN, FP, FN)       # Génération du rapport de classification
     lines = report.split('\n')
-    recall = float(lines[1].split(':')[1])
-    f1 = float(lines[2].split(':')[1])
-    if recall > best_recall and f1 > best_f1 * 0.95:  # compromis
+    recall = float(lines[1].split(':')[1])               # Extraction du recall depuis le rapport
+    f1 = float(lines[2].split(':')[1])                   # Extraction du F1-score depuis le rapport
+    # On cherche le meilleur compromis recall/F1 (favorise le recall si F1 reste élevé)
+    if recall > best_recall and f1 > best_f1 * 0.95:
         best_recall = recall
         best_f1 = f1
         best_threshold = threshold
+# Affichage du meilleur seuil trouvé avec les scores associés
 print(f"Meilleur seuil : {best_threshold:.2f} (Recall = {best_recall:.4f}, F1 = {best_f1:.4f})")
+
