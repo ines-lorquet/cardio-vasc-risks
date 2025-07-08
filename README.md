@@ -106,7 +106,7 @@ Le jeu de données contient les variables suivantes :
 - **Fonctionnement** :
   - Combinaison linéaire pondérée des variables d’entrée
   - Application d’une fonction sigmoïde
-  - Classification selon un seuil (_**0.20**_, déterminé automatiquement)
+  - Classification selon un seuil (_**0.45**_, déterminé automatiquement)
 - **Pondération des classes** : `pos_weight=2.0` (_compense le déséquilibre, favorise la détection des malades_)
 - **Régularisation L2** : pénalité pour éviter le surapprentissage (`l2=0.01`)
 - **Séparation des données** : _80 % entraînement, 20 % test_
@@ -122,7 +122,7 @@ Le jeu de données contient les variables suivantes :
   - **F1-score**
   - **AUC** (_aire sous la courbe ROC_)
 - **Analyse par sous-groupes** : _performances évaluées pour différents sous-groupes (glucose, cholestérol, fumeurs, alcool, inactifs) pour vérifier l’équité du modèle._
-- **Seuil de classification utilisé** : **0.20** (_voir ci-dessous l'impact sur les performances_)
+- **Seuil de classification utilisé** : **0.45** (_voir ci-dessous l'impact sur les performances_)
 
 ---
 
@@ -367,11 +367,11 @@ La normalisation appliquée est correcte :
 - **F1-score** : **67,1 %**
 - **AUC** : **78,5 %**
 
-> **Avec le seuil abaissé à 0.20, le modèle détecte quasiment tous les malades (rappel ≈ 99 %), mais au prix d’un taux de faux positifs très élevé (précision ≈ 51 %).**
+> **Avec le seuil à 0.45, le modèle détecte quasiment tous les malades (rappel ≈ 99 %), mais au prix d’un taux de faux positifs très élevé (précision ≈ 51 %).**
 
 ---
 
-### **Performances par sous-groupes (seuil 0.20)**
+### **Performances par sous-groupes (seuil 0.45)**
 
 | **Sous-groupe**    | **Précision** | **Rappel** | **F1-score** |
 |--------------------|:-------------:|:----------:|:------------:|
@@ -475,7 +475,7 @@ La normalisation appliquée est correcte :
 
 ## **🟩 Interprétation globale et conclusion**
 
-- **Le choix d’un seuil bas (0.20) maximise le rappel (sensibilité) : le modèle détecte presque tous les malades, ce qui est crucial en santé publique.**
+- **Le choix d’un seuil bas (0.45) maximise le rappel (sensibilité) : le modèle détecte presque tous les malades, ce qui est crucial en santé publique.**
 - **En contrepartie, la précision chute : beaucoup de personnes saines sont faussement classées à risque (faux positifs élevés).**
 - **Ce compromis est assumé** : il est préférable, en prévention, de ne pas rater de malades, même si cela implique d’alerter trop de personnes.
 - **Les variables médicales classiques dominent la prédiction.**
