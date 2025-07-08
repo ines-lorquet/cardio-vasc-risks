@@ -80,8 +80,7 @@ Le jeu de données contient les variables suivantes :
     - **1** : au-dessus de la normale
     - **2** : bien au-dessus de la normale
   Ces valeurs sont issues d’un score médical initial (1, 2, 3) ramené à (0, 1, 2) pour le traitement.
-- **Genre** est encodé en binaire (0 ou 1).
-- **Tabac**, **alcool** et **activité physique** sont encodés en 0 (non) ou 1 (oui).
+- **Genre**, **Tabac**, **alcool** et **activité physique** sont encodés est encodé en binaire (0 ou 1).
 
 ---
 
